@@ -1,16 +1,6 @@
 const quiz = new Quiz(sorular);
 const ui = new UI();
 
-//Quiz Menu
-ui.btn_start.addEventListener("click", function () {
-  ui.quiz_box.classList.add("active");
-  ui.soruGoster(quiz.soruGetir());
-  startTimerLine();
-  startTimer(10);
-  ui.soruSayisiniGoster(quiz.soruIndex + 1, quiz.sorular.length);
-  ui.btn_next.classList.remove("show");
-});
-
 //Quiz Start Butonu
 ui.btn_start.addEventListener("click", function () {
   ui.quiz_box.classList.add("active");
@@ -42,6 +32,62 @@ ui.btn_next.addEventListener("click", function () {
     ui.skoruGoster(quiz.sorular.length, quiz.dogruCevapSayisi);
   }
 });
+
+//Language
+let languageControl;
+function languageSelect(event) {
+  let selected_language = event.target;
+  selected_language.classList.add("language_selected");
+
+  if (
+    ui.turkish.classList.contains("language_selected") &&
+    ui.english.classList.contains("language_selected")
+  ) {
+    ui.english.classList.remove("language_selected");
+    languageControl = 0;
+    ui.turkish.classList.remove("language_selected");
+  }
+  if (ui.turkish.classList.contains("language_selected")) {
+    languageControl = 1;
+  } else if (ui.english.classList.contains("language_selected")) {
+    languageControl = 2;
+  }
+  languageSelected(languageControl);
+}
+
+//Çeviri
+function languageSelected(language) {
+  if (language == 1) {
+    document.querySelector("#math").innerText = "Matematik";
+    document.querySelector("#history").innerText = "Tarih";
+    document.querySelector("#geo").innerText = "Coğrafya";
+    document.querySelector("#mix").innerText = "Karışık";
+    document.querySelector(".btn_quiz_start").innerText = "Quiz'e Başla";
+  } else if (language == 2) {
+    document.querySelector("#math").innerText = "Math";
+    document.querySelector("#history").innerText = "History";
+    document.querySelector("#geo").innerText = "Geography";
+    document.querySelector("#mix").innerText = "Mixed";
+    document.querySelector(".btn_quiz_start").innerText = "Start Quiz";
+  }
+}
+
+//Dersler
+let classControl = false;
+function classSelect(event) {
+  let selected_class = event.target;
+  selected_class.classList.add("class_selected");
+  for (let i = 0; i < ui.classes.children.length; i++) {
+    if (ui.classes.children[i].classList.contains("class_selected")) {
+    } else {
+      ui.classes.children[i].classList.add("disabled");
+      classControl = true;
+    }
+  }
+  if ((languageControl == 1 || languageControl == 2) && classControl == true) {
+    ui.btn_start.classList.remove("btn_quiz_disabled");
+  }
+}
 
 //Şıklar
 function optionSelected(option) {

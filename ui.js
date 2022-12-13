@@ -6,13 +6,28 @@ function UI() {
     (this.btn_replay = document.querySelector(".btn_replay")),
     (this.score_box = document.querySelector(".score_box")),
     (this.option_list = document.querySelector(".option_list")),
+    (this.languages = document.querySelector(".languages")),
     (this.time_text = document.querySelector(".time_text")),
     (this.time_second = document.querySelector(".time_second")),
     (this.time_line = document.querySelector(".time_line")),
     (this.correctIcon = '<div class="icon"><i class="fas fa-check"></i></div>'),
     (this.incorrectIcon =
-      '<div class="icon"><i class="fas fa-times"></i></div>');
+      '<div class="icon"><i class="fas fa-times"></i></div>'),
+    (this.turkish = document.querySelector("#turkish")),
+    (this.english = document.querySelector("#english")),
+    (this.math = document.querySelector(".math")),
+    (this.history = document.querySelector(".history")),
+    (this.geography = document.querySelector(".geography")),
+    (this.classes = document.querySelector(".classes")),
+    (this.mixed = document.querySelector(".mixed"));
 }
+
+// UI.prototype.languageSelect = function language() {
+//   const quiz_language = this.languages.querySelectorAll(".language");
+//   for (let lng of quiz_language) {
+//     lng.setAttribute("onclick", "optionSelected(this)");
+//   }
+// };
 
 UI.prototype.soruGoster = function (soru) {
   let question = `<span>${soru.soruMetni}</span>`;
